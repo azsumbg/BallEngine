@@ -18,7 +18,7 @@ constexpr int DLL_NaN = 10003;
 enum class dirs { stop = 0, up = 1, down = 2, left = 3, right = 4, up_left = 5, up_right = 6, down_left = 7, down_right = 8 };
 enum class colors { blue = 0, red = 1, green = 2, purple = 3, yellow = 4 };
 enum class types { egg = 0, ball = 1, catapult = 2, axe = 3, no_type = 4 };
-enum class sizes { small = 0, middle = 1, big = 2 };
+enum class sizes { small_ball = 0, middle = 1, big = 2 };
 
 namespace dll
 {

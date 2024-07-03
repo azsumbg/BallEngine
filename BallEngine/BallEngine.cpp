@@ -56,7 +56,7 @@ class BALL :public dll::OBJECT
 						if (slope * (x - current_speed) + intercept <= 50.0f)
 						{
 							dir = dirs::down_right;
-							SetMoveVector(x, y, (float)(x + rand() % 20), scr_height - 100.0f);
+							SetMoveVector(x, y, (float)(ex + rand() % 50), scr_height - 100.0f);
 							break;
 						}
 						else
@@ -65,13 +65,13 @@ class BALL :public dll::OBJECT
 							if (choice == 2)
 							{
 								dir = dirs::up_right;
-								SetMoveVector(x, y, (float)(x + rand() % 20), 50.0f);
+								SetMoveVector(x, y, (float)(ex + rand() % 50), 50.0f);
 								break;
 							}
 							else if(choice == 0)
 							{
 								dir = dirs::down_right;
-								SetMoveVector(x, y, (float)(x + rand() % 20), scr_height - 100.0f);
+								SetMoveVector(x, y, (float)(ex + rand() % 50), scr_height - 100.0f);
 								break;
 							}
 							else
@@ -105,7 +105,7 @@ class BALL :public dll::OBJECT
 				break;
 
 			case dirs::up_right:
-				if (x + current_speed < scr_width && slope * (x - current_speed) + intercept > 50.0f)
+				if (x + current_speed + GetWidth() < scr_width && slope * (x + current_speed) + intercept > 50.0f)
 				{
 					x += current_speed;
 					y = slope * x + intercept;
@@ -114,7 +114,7 @@ class BALL :public dll::OBJECT
 				}
 				else
 				{
-					if (x + current_speed >= scr_width)
+					if (x + GetWidth() + current_speed >= scr_width)
 					{
 						if (slope * (x - current_speed) + intercept <= 50.0f)
 						{
@@ -128,7 +128,7 @@ class BALL :public dll::OBJECT
 							if (choice == 2)
 							{
 								dir = dirs::down_right;
-								SetMoveVector(x, y, (float)(x + rand() % 20), scr_height - 100.0f);
+								SetMoveVector(x, y, (float)(ex + rand() % 50), scr_height - 100.0f);
 								break;
 							}
 							else if (choice == 0)
@@ -150,12 +150,12 @@ class BALL :public dll::OBJECT
 						{
 						case 0:
 							dir = dirs::down_right;
-							SetMoveVector(x, y, (float)(x + rand() % 20), scr_height - 100.0f);
+							SetMoveVector(x, y, (float)(x + rand() % 50), scr_height - 100.0f);
 							break;
 
 						case 1:
 							dir = dirs::down_left;
-							SetMoveVector(x, y, (float)(x - rand() % 20), scr_height - 100.0f);
+							SetMoveVector(x, y, (float)(x - rand() % 50), scr_height - 100.0f);
 							break;
 
 						case 2:
@@ -168,7 +168,8 @@ class BALL :public dll::OBJECT
 				break;
 
 			case dirs::down_left:
-				if (x - current_speed > 0 && slope * (x - current_speed) + intercept < scr_height - 100.0f)
+				if (x - current_speed > 0 
+					&& slope * (x - current_speed) + intercept + GetHeight() < scr_height - 100.0f)
 				{
 					x -= current_speed;
 					y = slope * x + intercept;
@@ -179,10 +180,10 @@ class BALL :public dll::OBJECT
 				{
 					if (x - current_speed <= 0)
 					{
-						if (slope * (x - current_speed) + intercept >= scr_height - 100.0f)
+						if (slope * (x - current_speed) + intercept + GetHeight() >= scr_height - 100.0f)
 						{
 							dir = dirs::up_right;
-							SetMoveVector(x, y, (float)(x + rand() % 20), 50.0f);
+							SetMoveVector(x, y, (float)(ex + rand() % 50), 50.0f);
 							break;
 						}
 						else
@@ -191,13 +192,13 @@ class BALL :public dll::OBJECT
 							if (choice == 2)
 							{
 								dir = dirs::up_right;
-								SetMoveVector(x, y, (float)(x + rand() % 20), 50.0f);
+								SetMoveVector(x, y, (float)(ex + rand() % 50), 50.0f);
 								break;
 							}
 							else if (choice == 0)
 							{
 								dir = dirs::up_left;
-								SetMoveVector(x, y, (float)(x - rand() % 20), 50.0f);
+								SetMoveVector(x, y, (float)(ex - rand() % 50), 50.0f);
 								break;
 							}
 							else
@@ -213,12 +214,12 @@ class BALL :public dll::OBJECT
 						{
 						case 0:
 							dir = dirs::up_right;
-							SetMoveVector(x, y, (float)(x + rand() % 20), 50.0f);
+							SetMoveVector(x, y, (float)(ex + rand() % 50), 50.0f);
 							break;
 
 						case 1:
 							dir = dirs::up_left;
-							SetMoveVector(x, y, (float)(x - rand() % 20), 50.0f);
+							SetMoveVector(x, y, (float)(x - rand() % 50), 50.0f);
 							break;
 
 						case 2:
@@ -231,7 +232,8 @@ class BALL :public dll::OBJECT
 				break;
 
 			case dirs::down_right:
-				if (x + current_speed < scr_width && slope * (x - current_speed) + intercept < scr_height - 100.0f)
+				if (x + GetWidth() + current_speed < scr_width 
+					&& slope * (x + current_speed) + intercept + GetHeight () < scr_height - 100.0f)
 				{
 					x += current_speed;
 					y = slope * x + intercept;
@@ -240,9 +242,9 @@ class BALL :public dll::OBJECT
 				}
 				else
 				{
-					if (x + current_speed >= scr_width)
+					if (x + GetWidth() + current_speed >= scr_width)
 					{
-						if (slope * (x - current_speed) + intercept >= scr_height - 100.0f)
+						if (slope * (x - current_speed) + intercept + GetHeight() >= scr_height - 100.0f)
 						{
 							dir = dirs::up_left;
 							SetMoveVector(x, y, 0, 50.0f);
@@ -254,7 +256,7 @@ class BALL :public dll::OBJECT
 							if (choice == 2)
 							{
 								dir = dirs::up_right;
-								SetMoveVector(x, y, (float)(x + rand() % 20), 50.0f);
+								SetMoveVector(x, y, (float)(ex + rand() % 50), 50.0f);
 								break;
 							}
 							else if (choice == 0)
@@ -276,12 +278,12 @@ class BALL :public dll::OBJECT
 						{
 						case 0:
 							dir = dirs::up_right;
-							SetMoveVector(x, y, (float)(x + rand() % 20), 50.0f);
+							SetMoveVector(x, y, (float)(ex + rand() % 50), 50.0f);
 							break;
 
 						case 1:
 							dir = dirs::up_left;
-							SetMoveVector(x, y, (float)(x - rand() % 20), 50.0f);
+							SetMoveVector(x, y, (float)(x - rand() % 50), 50.0f);
 							break;
 
 						case 2:
@@ -323,7 +325,7 @@ class BALL :public dll::OBJECT
 				break;
 
 			case dirs::down:
-				if (y + current_speed < scr_height - 100.0f)
+				if (y + GetHeight() + current_speed < scr_height - 100.0f)
 				{
 					y += current_speed;
 					SetEdges();
@@ -352,7 +354,7 @@ class BALL :public dll::OBJECT
 				break;
 
 			case dirs::right:
-				if (x + current_speed < scr_width)
+				if (ex + current_speed < scr_width)
 				{
 					x += current_speed;
 					SetEdges();
@@ -421,7 +423,7 @@ class BALL :public dll::OBJECT
 				else return DLL_ERR;
 				break;
 
-			case sizes::small:
+			case sizes::small_ball:
 				if (size == sizes::middle)
 				{
 					size = to_what;
